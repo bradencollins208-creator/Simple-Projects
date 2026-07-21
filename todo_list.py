@@ -2,7 +2,12 @@ tasks = []
 def addTask(value):
     tasks.append(value)
 def removeTask(value):
-    tasks.remove(value)
+    if value in tasks:
+        tasks.remove(value)
+    else:
+        print("Task not in to-do list")
+def markComplete():
+    pass
 def printTasks():
     print("To-Do List:")
     for item in tasks:
@@ -18,14 +23,21 @@ while True:
     if (choice=="1"):
         print("Item Entry Mode")
         while True:
-            task = input("Enter task (enter \"stop\" to stop): ")
+            task = input("Enter task to add (enter \"stop\" to stop): ")
             if (task!="stop"):
                 addTask(task)
             else:
                 printTasks()
                 break
     elif choice=="2":
-        pass
+        print("Item Removal Mode")
+        while True:
+            task = input("Enter task to remove (enter \"stop\" to stop): ")
+            if (task!="stop"):
+                removeTask(task)
+            else:
+                printTasks()
+                break
     elif choice=="3":
         pass
     elif choice=="4":
