@@ -1,21 +1,27 @@
 tasks = []
 def printTasks():
     print("To-Do List:")
-    #for i in range(1,len(tasks)):
     for item in tasks:
-        print(str(tasks.index(item)+1)+". [ ] "+item["task"])
+        if item["completed"]==True:
+            print(str(tasks.index(item)+1)+". [✓] "+item["task"])
+        else:
+            print(str(tasks.index(item)+1)+". [ ] "+item["task"])
 def addTask(value):
     tasks.append({"task" : value, "completed" : False})
-def removeTask(value):
-    if value in tasks:
-        tasks.remove(value)
-    else:
-        print("Task not in to-do list")
 def markComplete(value):
-    if value in tasks:
-        pass
+    if ((int(value))<=len(tasks)):
+        tasks[int(value)-1]["completed"]=True
     else:
         print("Task not in to-do list")
+def removeTask(value):
+    if ((int(value))<=len(tasks)):
+        del tasks[int(value)-1]
+    else:
+        print("Task not in to-do list")
+def saveTasks():
+    pass
+def loadTasks():
+    pass
 while True:
     print("\nMake a to-do list!")
     print("1. Show Tasks")
@@ -36,26 +42,23 @@ while True:
                 addTask(task)
             else:
                 break
-    elif choice=="2":
-        print("Item Removal Mode")
+    elif choice=="3":
+        print("Item Completion Mode")
+        printTasks()
         while True:
-            task = input("Enter task to remove (enter \"stop\" to stop): ")
+            task = input("Enter the number of the task to mark complete (enter \"stop\" to stop): ")
+            if (task!="stop"):
+                markComplete(task)
+            else:
+                break
+    elif choice=="4":
+        print("Item Removal Mode")
+        printTasks()
+        while True:
+            task = input("Enter the number of the task to remove (enter \"stop\" to stop): ")
             if (task!="stop"):
                 removeTask(task)
             else:
-                printTasks()
-                break
-    elif choice=="3":
-        print("Item Completion Mode")
-        while True:
-            task = input("Enter task to mark complete (enter \"stop\" to stop): ")
-            if (task!="stop"):
-                #for item in tasks:
-                    #if item==task:
-                        #item=markComplete(task)
-                markComplete(task)
-            else:
-                printTasks()
                 break
     elif choice=="4":
         pass
