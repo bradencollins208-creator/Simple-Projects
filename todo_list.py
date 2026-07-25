@@ -1,3 +1,4 @@
+import json
 tasks = []
 def printTasks():
     print("To-Do List:")
@@ -19,9 +20,13 @@ def removeTask(value):
     else:
         print("Task not in to-do list")
 def saveTasks():
-    pass
+    file = open("tasks.json","w")
+    json.dump(tasks,file)
+    file.close()
 def loadTasks():
-    pass
+    file = open("tasks.json","r")
+    tasks.append(json.load(file))
+    file.close()
 while True:
     print("\nMake a to-do list!")
     print("1. Show Tasks")
@@ -60,8 +65,11 @@ while True:
                 removeTask(task)
             else:
                 break
-    elif choice=="4":
-        pass
+    elif choice=="5":
+        saveTasks()
+        print("Tasks have been saved to \"to_do_list.txt\"")
+    elif choice=="6":
+        loadTasks()
     elif choice=="0":
         break
     else:
